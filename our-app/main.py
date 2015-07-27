@@ -14,7 +14,8 @@ class Word(ndb.Model):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write("You just added a word.")
+        template = env.get_template("home.html")
+        self.response.write(template.render())
 
 class AddWordHandler(webapp2.RequestHandler):
     def get(self):
