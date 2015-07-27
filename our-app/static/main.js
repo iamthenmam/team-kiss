@@ -1,3 +1,4 @@
+
 var position = [27.1959739, 78.02423269999997];
 
 function showGoogleMaps() {
@@ -12,7 +13,7 @@ function showGoogleMaps() {
         center: latLng
     };
 
-    map = new google.maps.Map(document.getElementById('googlemaps'),
+    map = new google.maps.Map(document.getElementById("map"),
         mapOptions);
 
     // Show the default red marker at the location
@@ -24,4 +25,4 @@ function showGoogleMaps() {
     });
 }
 
-google.maps.event.addDomListener(window, 'load', showGoogleMaps);
+google.maps.event.addDomListener(window, "load", showGoogleMaps);

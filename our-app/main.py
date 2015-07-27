@@ -5,7 +5,7 @@ import datetime
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader("templates"))
 
-class Word(ndb.Model)
+class Word(ndb.Model):
     location = ndb.StringProperty(required=True)
     word = ndb.StringProperty(required=True)
     definition = ndb.TextProperty(required=True)
