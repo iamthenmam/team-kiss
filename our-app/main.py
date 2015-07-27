@@ -1,7 +1,10 @@
 import webapp2
 import jinja2
 from google.appengine.ext import ndb
+from google.appengine.api import urlfetch
 import datetime
+import json
+import logging
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader("templates"))
 
@@ -14,7 +17,13 @@ class Word(ndb.Model):
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template("home.html")
-        self.response.write(template.render())
+        urban_data_source = urlfetch.fetch("http://api.urbandictionary.com/v0/define?term=start")
+        urban_json_content = urban_data_source.content
+        urban_definition = json.loads(urban_json_content)
+        urban_url = urban_definition['list'][0]['definition']
+        logging.info('!!!!!!' + urban_url)
+        template_data = {'search_url' : urban_url}
+        self.response.write(template.render(template_data))
 
 class AddWordHandler(webapp2.RequestHandler):
     def get(self):
