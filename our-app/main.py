@@ -1,4 +1,15 @@
 import webapp2
+import jinja2
+from google.appengine.ext import ndb
+import datetime
+
+env = jinja2.Environment(loader=jinja2.FileSystemLoader("templates"))
+
+class Word(ndb.Model)
+    location = ndb.StringProperty(required=True)
+    word = ndb.StringProperty(required=True)
+    definition = ndb.TextProperty(required=True)
+    timestamp = ndb.DateTimeProperty(required=True)
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -21,5 +32,6 @@ class AddWordHandler(webapp2.RequestHandler):
         self.redirect("/")
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ("/add", AddWordHandler)
 ], debug=True)
