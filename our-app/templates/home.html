@@ -8,23 +8,25 @@
     <div id="middle-menu">
       <h1>SLAP</h1>
       <form method="POST" action="">
-        <input type="search" name="search_name" value=""><button>search</button><br>
+        <input id="search" type="search" name="search_name" value=""><button>search</button><br>
       </form>
-      <h2>urban's definition for {{word_searched}} :</h2>
-      {% if search_def|length == 0 %}
-        <p>No search results.</p>
-      {% else %}
-        {{search_def}}
-      {% endif %}
-      <br><br>
-      <p><h2>your definitions for {{word_searched}}:</h2></p>
-      {% if defs|length == 0 %}
-        <p>No search results.</p>
-      {% else %}
-        {% for def in defs %}
-          <p>{{def.definition}}</p>
-        {% endfor %}
-      {% endif %}
+      <div id="search_results">
+        <h2>Urban Dictionary's definition for {{word_searched}}:</h2>
+        {% if search_def|length == 0 %}
+          <p>No search results.</p>
+        {% else %}
+          {{search_def}}
+        {% endif %}
+        <br><br>
+        <p><h2>What others think {{word_searched}} means:</h2></p>
+        {% if defs|length == 0 %}
+          <p>No search results.</p>
+        {% else %}
+          {% for def in defs %}
+            <p>{{def.definition}}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
     </div>
     <div id="map-canvas"></div>
     <div id="links">
