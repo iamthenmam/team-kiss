@@ -1,4 +1,4 @@
-// $("results").hide();
+// $("results").hide()
 
 // $("#results").click(function() {
 //   $("#results").show()
