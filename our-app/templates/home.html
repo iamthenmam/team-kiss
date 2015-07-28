@@ -5,33 +5,38 @@
     <title>The Slang Map</title>
   </head>
   <body id="home-body" onload="initialize()">
-    <div id="middle-menu">
-      <h1>SLAP</h1>
-      <form method="POST" action="">
-        <input type="search" name="search_name" value=""><button>search</button><br>
-      </form>
-      <h2>urban's definition for {{word_searched}} :</h2>
-      {% if search_def|length == 0 %}
-        <p>No search results.</p>
-      {% else %}
-        {{search_def}}
-      {% endif %}
-      <br><br>
-      <p><h2>your definitions for {{word_searched}}:</h2></p>
-      {% if defs|length == 0 %}
-        <p>No search results.</p>
-      {% else %}
-      {% for def in defs %}
-        <p>{{def.definition}}</p>
-      {% endfor %}
-      {% endif %}
-    </div>
-    <div id="map-canvas"></div>
-    <div id="links">
-      <a href="/add">Add a Word</a>
+    <h1>SLAP</h1>
+      <div id="search-bar">
+        <form method="POST" action="">
+          <input type="search" name="search_name" size="40%"><button>search</button>
+        </form>
+      </div>
       <br>
-      <a href="/about">About Us</a>
-    </div>
-    <script src="static/main.js"></script>
+      <br>
+      <div id="results">
+        <h2>urban's definition for {{word_searched}} :</h2>
+        {% if search_def|length == 0 %}
+          <p>No search results.</p>
+        {% else %}
+          {{search_def}}
+        {% endif %}
+        <br><br>
+        <p><h2>your definitions for {{word_searched}}:</h2></p>
+        {% if defs|length == 0 %}
+          <p>No search results.</p>
+        {% else %}
+        {% for def in defs %}
+          <p>{{def.definition}}</p>
+        {% endfor %}
+        {% endif %}
+      </div>
+    <div id="map-canvas"></div>
+    <footer id="links">
+     <a href="/add">Add a Word</a>
+     <br>
+     <a href="/about">About Us</a>
+   </footer>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   <script src="static/main.js"></script>
   </body>
 </html>
