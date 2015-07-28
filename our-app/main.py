@@ -17,7 +17,14 @@ class Word(ndb.Model):
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template("home.html")
-        self.response.write(template.render())
+        #slang of the day
+        todays_word_source = urlfetch.fetch("http://urban-word-of-the-day.herokuapp.com/")
+        todays_word_content = todays_word_source.content
+        todays_word_dictionary = json.loads(todays_word_content)
+        todays_word = todays_word_dictionary['word']
+        todays_def = todays_word_dictionary['meaning']
+        variables = {'todays_word' : todays_word, 'todays_def' : todays_def}
+        self.response.write(template.render(variables))
     def post(self):
         template = env.get_template("home.html")
         word_searched = self.request.get('search_name').lower() #gets searched word from html
