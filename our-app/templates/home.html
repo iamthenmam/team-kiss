@@ -9,19 +9,19 @@
     <form method="POST" action="">
       <input type="search" name="search_name" value=""><button>search</button><br>
     </form>
-    word : {{search_url}}
+    <h2>urban's definition for {{word_searched}} :</h2> {{search_def}}
     <br><br>
     <div id="search_results">
-      <p><h2>{{word_searched}}</h3></p>
-      {% if defs|length == 0 %}
+      <p><h2>your definitions for {{word_searched}}:</h2></p>
+      {% if defs|length == 0 and search_def|length == 0 %}
         <p>No search results.</p>
       {% endif %}
       {% for def in defs %}
         <p>{{def.definition}}</p>
       {% endfor %}
     </div>
-    <div id="map-canvas"></div>
+    <!--<div id="map-canvas"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABHO66skhWRgmCmYBKGQ-XSqZpaP8AkLI" type="text/javascript"></script>
-    <script src="static/main.js"></script>
+    <script src="static/main.js"></script>-->
   </body>
 </html>
