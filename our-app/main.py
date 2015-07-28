@@ -20,7 +20,7 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(template.render())
     def post(self):
         template = env.get_template("home.html")
-        word_searched = self.request.get('search_name')
+        word_searched = self.request.get('search_name').lower()
         logging.info(word_searched + "!!!!")
         urban_url = ""
         if len(word_searched) > 0:
@@ -43,7 +43,7 @@ class AddWordHandler(webapp2.RequestHandler):
         self.response.write(template.render())
     def post(self):
         location = self.request.get("location_box")
-        word = self.request.get("word_box")
+        word = self.request.get("word_box").lower()
         definition = self.request.get("definition_box")
         added_word = Word(location=location,
                           word=word,

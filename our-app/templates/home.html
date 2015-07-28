@@ -21,19 +21,17 @@
       {% if defs|length == 0 %}
         <p>No search results.</p>
       {% else %}
-      {% for def in defs %}
-        <p>{{def.definition}}</p>
-      {% endfor %}
+        {% for def in defs %}
+          <p>{{def.definition}}</p>
+        {% endfor %}
       {% endif %}
     </div>
-
     <div id="map-canvas"></div>
     <div id="links">
      <a href="/add">Add a Word</a>
      <br>
      <a href="/about">About Us</a>
    </div>
-
     <script src="static/main.js"></script>
   </body>
 </html>
