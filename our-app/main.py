@@ -40,7 +40,13 @@ class AddWordHandler(webapp2.RequestHandler):
         added_word.put()
         self.redirect("/")
 
+class AboutHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template("about.html")
+        self.response.write(template.render())
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    ("/add", AddWordHandler)
+    ("/", MainHandler),
+    ("/add", AddWordHandler),
+    ("/about", AboutHandler)
 ], debug=True)
