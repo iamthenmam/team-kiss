@@ -1,5 +1,4 @@
 
-
 #map-canvas {
   height: 100%;
   width: 100%;
@@ -19,16 +18,6 @@ h1 {
 #search-bar {
   height: 20px;
   margin-bottom: 20px;
-  width: 40%;
-  text-align: center;
-  position: absolute;
-  z-index: 1;
-  background-color: white;
-  float: left;
-}
-
-#results {
-  height: 40%;
   width: 40%;
   text-align: center;
   position: absolute;

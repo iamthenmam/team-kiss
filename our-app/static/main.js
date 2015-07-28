@@ -1,8 +1,8 @@
-$("#results").hide()
+// $("results").hide();
 
-$("#results").click(function() {
-  $("#results").show()
-})
+// $("#results").click(function() {
+//   $("#results").show()
+// })
 
 function initialize() {
   var mapCanvas = document.getElementById("map-canvas");

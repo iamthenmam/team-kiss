@@ -20,20 +20,20 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(template.render())
     def post(self):
         template = env.get_template("home.html")
-        word_searched = self.request.get('search_name')
-        logging.info(word_searched + "!!!!")
+        word_searched = self.request.get('search_name').lower() #gets searched word from html
+        #logging.info(word_searched + "!!!!")
         urban_url = ""
-        if len(word_searched) > 0:
+        if len(word_searched) > 0: #checks if actual word is searched
             if " " in word_searched:
-                word_searched = word_searched.replace(" ", "%20")
+                word_searched = word_searched.replace(" ", "%20") #replaces spaces in word searched
             urban_data_source = urlfetch.fetch("http://api.urbandictionary.com/v0/define?term=%s" % word_searched)
             urban_json_content = urban_data_source.content
             urban_definition = json.loads(urban_json_content)
-            if len(urban_definition['list']) > 0:
-                urban_url = urban_definition['list'][0]['definition']
-                logging.info('!!!!!!' + urban_url)
-        word_searched = word_searched.replace("%20", " ")
-        defs = Word.query(Word.word == word_searched).fetch()
+            if len(urban_definition['list']) > 0: #checks if word actually has definitions
+                urban_url = urban_definition['list'][0]['definition'] #gets definition
+                #logging.info('!!!!!!' + urban_url)
+        word_searched = word_searched.replace("%20", " ") #puts spaces back into word to print
+        defs = Word.query(Word.word == word_searched).fetch() #gets list of definitions for the word searched from database
         variables = {'word_searched': word_searched, 'defs': defs, 'search_def': urban_url}
         self.response.write(template.render(variables))
 
@@ -43,7 +43,7 @@ class AddWordHandler(webapp2.RequestHandler):
         self.response.write(template.render())
     def post(self):
         location = self.request.get("location_box")
-        word = self.request.get("word_box")
+        word = self.request.get("word_box").lower()
         definition = self.request.get("definition_box")
         added_word = Word(location=location,
                           word=word,
