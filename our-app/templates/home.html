@@ -8,7 +8,7 @@
     <div id="middle-menu">
       <h1>SLAP</h1>
       <form method="POST" action="">
-        <input id="search" type="search" name="search_name" value=""><button>search</button><br>
+        <input type="search" name="search_name" size="40%"><button>search</button>
       </form>
       <div id="search_results">
         <h2>Urban Dictionary's definition for {{word_searched}}:</h2>
@@ -29,11 +29,12 @@
       </div>
     </div>
     <div id="map-canvas"></div>
-    <div id="links">
+    <footer id="links">
      <a href="/add">Add a Word</a>
      <br>
      <a href="/about">About Us</a>
-   </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="static/main.js"></script>
   </body>
 </html>
