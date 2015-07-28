@@ -1,9 +1,5 @@
 
 
-#home-body {
-  text-align: center;
-}
-
 #map-canvas {
   height: 100%;
   width: 100%;
@@ -14,5 +10,13 @@
 }
 
 #middle-menu {
+  text-align: center;
+  postion: relative;
   z-index: 1;
+  background-color: white;
+}
+
+#links {
+  position: relative;
+  bottom: 100%;
 }
