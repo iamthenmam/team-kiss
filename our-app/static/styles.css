@@ -1,4 +1,3 @@
-
 #map-canvas {
   height: 100%;
   width: 100%;
@@ -15,25 +14,11 @@
   font-size: 76px;
 }
 
-#search-bar {
-  height: 20px;
-  margin-bottom: 20px;
-  width: 40%;
-  text-align: center;
+#middle_menu {
   position: absolute;
   z-index: 1;
-  background-color: white;
-  float: left;
-}
-
-#results {
-  height: 40%;
-  width: 40%;
-  text-align: center;
-  position: absolute;
-  z-index: 1;
-  background-color: white;
-  float: left;
+  top: 75px;
+  left: 75px;
 }
 
  #links {
@@ -42,3 +27,30 @@
    bottom: 100%;
    z-index: 1;
  }
+
+form {
+  position: relative;
+  width: 300px;
+  margin: 5px 20px;
+}
+
+#search, #location_search {
+  position: relative;
+  height: 40px;
+  padding: 8px 16px;
+  background: #333333;
+  border: 0px;
+  font-size: 20px;
+  color: #CCCCCC;
+  margin: 0px;
+}
+
+#results, #slang_of_the_day {
+  position: relative;
+  background: #333333;
+  padding: 20px;
+  width: 400px;
+  margin: 5px 20px;
+  color: #BBBBBB;
+  font-family: "Arial", "sans-serif";
+}

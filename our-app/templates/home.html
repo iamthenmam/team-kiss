@@ -6,36 +6,33 @@
   </head>
   <body id="home-body" onload="initialize()">
     <h1 id="logo">SLAP</h1>
+    <div id="middle_menu">
       <div id="search-bar">
         <form method="POST" action="">
-          <input type="search" name="search_name" size="40%"><button id="search-button">search</button>
-          <button id="toggle-button">hide-show</button>
+          <input id="search" type="search" name="search_name" size="40%" placeholder="Search for a word">
+          <!-- <button id="toggle-button">hide-show</button> -->
         </form>
-        <br>
         <form method="POST" action="">
-          <input type="search" name="location" size="40%"><button>search</button>
+          <input id="location_search" type="search" name="location" size="40%" placeholder="Search for a location">
         </form>
-      </div>
-      
-      <div id ="slang_of_the_day">
-      <h2> Slang of the Day: </h2>
-      <p>
-        {{todays_word}} <br>
-        {{todays_def}}
-      </p>
       </div>
 
-      <br>
-      <br>
+      <div id ="slang_of_the_day">
+        <h2> Slang of the Day: </h2>
+        <p>
+          {{todays_word}} <br>
+          {{todays_def}}
+        </p>
+      </div>
       <div id="results">
-        <h2>urban's definition for {{word_searched}} :</h2>
+        <h2>Urban Dictionary's definition for {{word_searched}}:</h2>
         {% if search_def|length == 0 %}
           <p>No search results.</p>
         {% else %}
           {{search_def}}
         {% endif %}
         <br><br>
-        <p><h2>your definitions for {{word_searched}}:</h2></p>
+        <p><h2>What others think {{word_searched}} means:</h2></p>
         {% if defs|length == 0 %}
           <p>No search results.</p>
         {% else %}
@@ -44,6 +41,7 @@
         {% endfor %}
         {% endif %}
       </div>
+    </div>
     <div id="map-canvas"></div>
     <footer id="links">
      <a href="/add">Add a Word</a>

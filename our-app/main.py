@@ -16,8 +16,7 @@ class Word(ndb.Model):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        template = env.get_template("home.html")
-        #slang of the day
+        template = env.get_template("home.html") #slang of the day
         todays_word_source = urlfetch.fetch("http://urban-word-of-the-day.herokuapp.com/")
         todays_word_content = todays_word_source.content
         todays_word_dictionary = json.loads(todays_word_content)
@@ -29,7 +28,15 @@ class MainHandler(webapp2.RequestHandler):
         template = env.get_template("home.html")
         word_searched = self.request.get('search_name').lower() #gets searched word from html
         #logging.info(word_searched + "!!!!")
+
+        todays_word_source = urlfetch.fetch("http://urban-word-of-the-day.herokuapp.com/")
+        todays_word_content = todays_word_source.content
+        todays_word_dictionary = json.loads(todays_word_content)
+        todays_word = todays_word_dictionary['word']
+        todays_def = todays_word_dictionary['meaning']
+
         urban_url = ""
+
         if len(word_searched) > 0: #checks if actual word is searched
             if " " in word_searched:
                 word_searched = word_searched.replace(" ", "%20") #replaces spaces in word searched
@@ -39,9 +46,12 @@ class MainHandler(webapp2.RequestHandler):
             if len(urban_definition['list']) > 0: #checks if word actually has definitions
                 urban_url = urban_definition['list'][0]['definition'] #gets definition
                 #logging.info('!!!!!!' + urban_url)
+
         word_searched = word_searched.replace("%20", " ") #puts spaces back into word to print
         defs = Word.query(Word.word == word_searched).fetch() #gets list of definitions for the word searched from database
-        variables = {'word_searched': word_searched, 'defs': defs, 'search_def': urban_url}
+
+        variables = {'word_searched': word_searched, 'defs': defs, 'search_def': urban_url,
+                     'todays_word': todays_word, 'todays_def': todays_def}
         self.response.write(template.render(variables))
 
 class AddWordHandler(webapp2.RequestHandler):
