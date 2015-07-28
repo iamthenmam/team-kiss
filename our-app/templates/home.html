@@ -5,16 +5,16 @@
     <title>The Slang Map</title>
   </head>
   <body id="home-body" onload="initialize()">
-  <div id="middle-menu">
+    <div id="middle-menu">
       <h1>SLAP</h1>
-        <form method="POST" action="">
-          <input type="search" name="search_name" value=""><button>search</button><br>
-        </form>
-      word : {{search_url}}
+      <form method="POST" action="">
+        <input type="search" name="search_name" value=""><button>search</button><br>
+      </form>
+      <h2>urban's definition for {{word_searched}} :</h2> {{search_def}}
       <br><br>
       <div id="search_results">
-        <p><h2>{{word_searched}}</h3></p>
-        {% if defs|length == 0 %}
+        <p><h2>your definitions for {{word_searched}}:</h2></p>
+        {% if defs|length == 0 and search_def|length == 0 %}
           <p>No search results.</p>
         {% endif %}
         {% for def in defs %}
