@@ -24,12 +24,15 @@ class MainHandler(webapp2.RequestHandler):
         logging.info(word_searched + "!!!!")
         urban_url = ""
         if len(word_searched) > 0:
+            if " " in word_searched:
+                word_searched = word_searched.replace(" ", "%20")
             urban_data_source = urlfetch.fetch("http://api.urbandictionary.com/v0/define?term=%s" % word_searched)
             urban_json_content = urban_data_source.content
             urban_definition = json.loads(urban_json_content)
             if len(urban_definition['list']) > 0:
                 urban_url = urban_definition['list'][0]['definition']
                 logging.info('!!!!!!' + urban_url)
+        word_searched = word_searched.replace("%20", " ")
         defs = Word.query(Word.word == word_searched).fetch()
         variables = {'word_searched': word_searched, 'defs': defs, 'search_def': urban_url}
         self.response.write(template.render(variables))
