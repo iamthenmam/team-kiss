@@ -1,8 +1,8 @@
-// $("results").hide()
-
-// $("#results").click(function() {
+// $("#hide-button").click(function() {
+//   $("#results").toggle()
+//
+// $("#search-button").click(function() {
 //   $("#results").show()
-// })
 
 function initialize() {
   var mapCanvas = document.getElementById("map-canvas");
@@ -13,7 +13,7 @@ function initialize() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
-  var backgroundMap = new google.maps.Map(mapCanvas, mapOptions);
+  backgroundMap = new google.maps.Map(mapCanvas, mapOptions);
 
 }
 
@@ -27,6 +27,3 @@ function loadScript() {
 }
 
 window.onload = loadScript;
-
-
-// codeAddress('London')
