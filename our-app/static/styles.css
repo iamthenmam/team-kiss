@@ -1,22 +1,18 @@
-/*
-body {
-  background: url("http://cdn.shopify.com/s/files/1/0071/5032/products/World_Maps_International_20mil_1.jpg?v=1413619116") no-repeat;
-  min-height: 100%
-  background-size: cover;
-}
-*/
+
 
 #home-body {
   text-align: center;
 }
 
 #map-canvas {
-  height: 50%;
-  width: 50%;
+  height: 100%;
+  width: 100%;
   position:absolute;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
-  z-index: 0; /* Set z-index to 0 as it will be on a layer below the contact form */
+  z-index: 0; /* Set z-index to 0 sp it'll be on the lowest layer */
+}
+
+#middle-menu {
+  z-index: 1;
 }
