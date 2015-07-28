@@ -11,7 +11,6 @@ function initialize() {
 
   var backgroundMap = new google.maps.Map(mapCanvas, mapOptions);
 
-  // google.maps.event.addDomListener(window, "load", initialize);
 }
 
 function loadScript() {
@@ -27,7 +26,3 @@ window.onload = loadScript;
 
 
 // codeAddress('London')
-
-// $(document).ready(function() {
-//     console.log("page loaded!");
-// }
