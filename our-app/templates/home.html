@@ -10,17 +10,21 @@
       <form method="POST" action="">
         <input type="search" name="search_name" value=""><button>search</button><br>
       </form>
-      <h2>urban's definition for {{word_searched}} :</h2> {{search_def}}
+      <h2>urban's definition for {{word_searched}} :</h2>
+      {% if search_def|length == 0 %}
+        <p>No search results.</p>
+      {% else %}
+        {{search_def}}
+      {% endif %}
       <br><br>
-      <div id="search_results">
-        <p><h2>your definitions for {{word_searched}}:</h2></p>
-        {% if defs|length == 0 and search_def|length == 0 %}
-          <p>No search results.</p>
-        {% endif %}
-        {% for def in defs %}
-          <p>{{def.definition}}</p>
-        {% endfor %}
-      </div>
+      <p><h2>your definitions for {{word_searched}}:</h2></p>
+      {% if defs|length == 0 %}
+        <p>No search results.</p>
+      {% else %}
+      {% for def in defs %}
+        <p>{{def.definition}}</p>
+      {% endfor %}
+      {% endif %}
     </div>
     <div id="map-canvas"></div>
     <script src="static/main.js"></script>
