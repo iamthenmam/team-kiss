@@ -24,6 +24,13 @@ class MainHandler(webapp2.RequestHandler):
         logging.info('!!!!!!' + urban_url)
         template_data = {'search_url' : urban_url}
         self.response.write(template.render(template_data))
+    def post(self):
+        template = env.get_template("home.html")
+        word_searched = self.request.get('search_name')
+        logging.info(word_searched + "!!!!")
+        defs = Word.query(Word.word == word_searched).fetch()
+        variables = {'word_searched': word_searched, 'defs': defs}
+        self.response.write(template.render(variables))
 
 class AddWordHandler(webapp2.RequestHandler):
     def get(self):

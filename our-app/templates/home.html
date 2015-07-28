@@ -6,9 +6,20 @@
   </head>
   <body id="home-body">
     <h1>SLAP</h1>
-    <input type="search" name="name" value=""><button>search</button><br>
+    <form method="POST" action="">
+      <input type="search" name="search_name" value=""><button>search</button><br>
+    </form>
     word : {{search_url}}
     <br><br>
+    <div id="search_results">
+      <p><h2>{{word_searched}}</h3></p>
+      {% if defs|length == 0 %}
+        <p>No search results.</p>
+      {% endif %}
+      {% for def in defs %}
+        <p>{{def.definition}}</p>
+      {% endfor %}
+    </div>
     <div id="map-canvas"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABHO66skhWRgmCmYBKGQ-XSqZpaP8AkLI" type="text/javascript"></script>
     <script src="static/main.js"></script>
