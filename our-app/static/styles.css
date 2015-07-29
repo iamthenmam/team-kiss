@@ -45,7 +45,7 @@ form {
   margin: 0px;
 }
 
-#results, #slang_of_the_day {
+#results, #slang_of_the_day, #trending {
   position: relative;
   background: #333333;
   padding: 20px;

@@ -17,13 +17,21 @@
         </form>
       </div>
 
-      <div id ="slang_of_the_day">
+      <div id="slang_of_the_day">
         <h2> Slang of the Day: </h2>
         <p>
           {{todays_word}} <br>
           {{todays_def}}
         </p>
       </div>
+
+      <div id="trending">
+        <h2>Trending Searches:</h2>
+        {% for item in trending %}
+          <p>{{item.word}}</p>
+        {% endfor %}
+      </div>
+
       <div id="results">
         <h2>Urban Dictionary's definition for {{word_searched}}:</h2>
         {% if search_def|length == 0 %}

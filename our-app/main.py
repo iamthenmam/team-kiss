@@ -14,20 +14,35 @@ class Word(ndb.Model):
     definition = ndb.TextProperty(required=True)
     timestamp = ndb.DateTimeProperty(required=True)
 
+class Searched_Word(ndb.Model):
+    word = ndb.StringProperty(required=True)
+    count = ndb.IntegerProperty(required=True)
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        trending_results = Searched_Word.query().fetch()
+        #posts.sort(key=lambda x: x.timestamp, reverse=True)
+        trending_results.sort(key=lambda x: x.count, reverse=True)
+        trending = trending_results[:3]
+
         template = env.get_template("home.html") #slang of the day
         todays_word_source = urlfetch.fetch("http://urban-word-of-the-day.herokuapp.com/")
         todays_word_content = todays_word_source.content
         todays_word_dictionary = json.loads(todays_word_content)
         todays_word = todays_word_dictionary['word']
         todays_def = todays_word_dictionary['meaning']
-        variables = {'todays_word' : todays_word, 'todays_def' : todays_def}
+        variables = {'todays_word' : todays_word, 'todays_def' : todays_def, 'trending': trending}
         self.response.write(template.render(variables))
     def post(self):
         template = env.get_template("home.html")
         word_searched = self.request.get('search_name').lower() #gets searched word from html
         #logging.info(word_searched + "!!!!")
+
+        #trending
+        trending_results = Searched_Word.query().fetch()
+        #posts.sort(key=lambda x: x.timestamp, reverse=True)
+        trending_results.sort(key=lambda x: x.count, reverse=True)
+        trending = trending_results[:3]
 
         todays_word_source = urlfetch.fetch("http://urban-word-of-the-day.herokuapp.com/")
         todays_word_content = todays_word_source.content
@@ -38,6 +53,14 @@ class MainHandler(webapp2.RequestHandler):
         urban_url = ""
 
         if len(word_searched) > 0: #checks if actual word is searched
+            #first count searched word
+            list_of_sw = Searched_Word.query(Searched_Word.word == word_searched).fetch()
+            if len(list_of_sw) > 0:
+                list_of_sw[0].count += 1
+                list_of_sw[0].put()
+            else:
+                Searched_Word(word=word_searched, count=1).put()
+
             if " " in word_searched:
                 word_searched = word_searched.replace(" ", "%20") #replaces spaces in word searched
             urban_data_source = urlfetch.fetch("http://api.urbandictionary.com/v0/define?term=%s" % word_searched)
@@ -51,7 +74,7 @@ class MainHandler(webapp2.RequestHandler):
         defs = Word.query(Word.word == word_searched).fetch() #gets list of definitions for the word searched from database
 
         variables = {'word_searched': word_searched, 'defs': defs, 'search_def': urban_url,
-                     'todays_word': todays_word, 'todays_def': todays_def}
+                     'todays_word': todays_word, 'todays_def': todays_def, 'trending': trending}
         self.response.write(template.render(variables))
 
 class AddWordHandler(webapp2.RequestHandler):
