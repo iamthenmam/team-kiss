@@ -1,0 +1,38 @@
+
+#info {
+  font-family: 'Dosis', "Arial", "sans-serif";
+  padding: 30px;
+  background: #333333;
+  border: 0px;
+  font-size: 25px;
+  margin: 0px 0px 0px 150px;
+  color: #CCCCCC;
+  width: 500px;
+}
+
+#info #home {
+  color: #888888;
+  padding: 0px;
+}
+
+#welcome {
+  margin: 100px 0px 0px 150px;
+  font-size: 46px;
+}
+
+#links {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
+#add_button {
+  width: 140px;
+  height: 140px;
+}
+
+#about_button {
+  width: 120px;
+  height: 120px;
+  padding: 10px;
+}
