@@ -54,3 +54,8 @@ form {
   color: #BBBBBB;
   font-family: "Arial", "sans-serif";
 }
+
+#results {
+  height: 300px;
+  overflow-y: scroll;
+}

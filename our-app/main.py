@@ -89,8 +89,12 @@ class AddWordHandler(webapp2.RequestHandler):
                           word=word,
                           definition=definition,
                           timestamp=datetime.datetime.now())
-        added_word.put()
-        self.redirect("/")
+        if not added_word.location and added_word.word and added_word.definition == None:
+            added_word.put()
+            self.redirect("/")
+        else:
+            self.redirect("/add")
+
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
