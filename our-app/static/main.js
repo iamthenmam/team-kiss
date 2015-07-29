@@ -1,5 +1,5 @@
 $("#toggleButton").click(function() {
-  $("#results").toggle();
+  $("#results").slideToggle(250);
 });
 
 function loadScript() {
@@ -26,20 +26,4 @@ function initialize() {
   };
 
   backgroundMap = new google.maps.Map(mapCanvas, mapOptions);
-}
-
-function codeAddress() {
-  var geocoder = new google.maps.Geocoder();
-  var address = document.getElementById("uncoded_location").value;
-  geocoder.geocode({"address": address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      var converted_location = (results[0].geometry.location);
-    } else {
-      alert("Geocode was not successful for the following reason: " + status);
-    }
-  function setOutput(itsId, itsValue) {
-    document.getElementById(itsId).value = itsValue;
-  };
-  setOutput(uncoded_location, converted_location);
-  });
 }

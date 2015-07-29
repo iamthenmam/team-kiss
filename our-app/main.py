@@ -68,9 +68,18 @@ class AddWordHandler(webapp2.RequestHandler):
         self.response.write(template.render())
     def post(self):
         location = self.request.get("location_box")
+        safe_location = location.replace(" ", "+")
+        json_url = "https://maps.googleapis.com/maps/api/geocode/json?address=Oakland,+CA&key=AIzaSyAQeIATzPIzimJIYBgyN-b2rDX79rylZwc"
+        json_code = urlfetch.fetch(json_url)
+        json_content = json_code.content
+        result = json.loads(json_content)["results"]
+        lat = result[0]["geometry"]["location"]["lat"]
+        lng = result[0]["geometry"]["location"]["lng"]
+        geocoded_location = str(lat) + ", " + str(lng)
+        self.response.write(geocoded_location)
         word = self.request.get("word_box").lower()
         definition = self.request.get("definition_box")
-        added_word = Word(location=location,
+        added_word = Word(location=geocoded_location,
                           word=word,
                           definition=definition,
                           timestamp=datetime.datetime.now())
