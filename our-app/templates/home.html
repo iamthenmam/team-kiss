@@ -77,12 +77,26 @@
       <button id="toggleButton">toggle definitions</button>
     </div>
     <div id="map-canvas"></div>
+    <script>
+    window.markers = [];
+      function addMarker(itsLat, itsLng, itsWord) {
+        marker = {"lat": itsLat,
+                  "lng": itsLng,
+                  "title": itsWord};
+        window.markers.push(marker);
+      }
+    </script>
+    {% for marker in markers %}
+      <script>
+        addMarker({{marker.latitude}}, {{marker.longitude}}, "{{marker.word}}")
+      </script>
+    {% endfor %}
     <footer id="links">
-      <a href="/add"><img src="/static/images/add_button2.png" id="add_button" title="Slap a word on the map"></a>
-      <a href="/about"><img src="/static/images/about_button2.png" id="about_button" title="About SLAP"></a>
-    </footer>
+     <a href="/add"><img src="/static/images/add_button2.png" id="add_button" title="Slap a word on the map"></a>
+     <a href="/about"><img src="/static/images/about_button2.png" id="about_button" title="About SLAP"></a>
+   </footer>
+   <script src="https://apis.google.com/js/platform.js" async defer></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
    <script src="static/main.js"></script>
-   <script src="https://apis.google.com/js/platform.js" async defer></script>
   </body>
 </html>

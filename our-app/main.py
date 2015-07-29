@@ -9,9 +9,17 @@ import logging
 env = jinja2.Environment(loader=jinja2.FileSystemLoader("templates"))
 
 class Word(ndb.Model):
-    location = ndb.StringProperty(required=True)
+    latitude = ndb.FloatProperty(required=True)
+    longitude = ndb.FloatProperty(required=True)
     word = ndb.StringProperty(required=True)
     definition = ndb.TextProperty(required=True)
+    timestamp = ndb.DateTimeProperty(required=True)
+
+class Marker(ndb.Model):
+    latitude = ndb.FloatProperty(required=True)
+    longitude = ndb.FloatProperty(required=True)
+    word = ndb.StringProperty(required=True)
+    definition = ndb.StringProperty(required=True)
     timestamp = ndb.DateTimeProperty(required=True)
 
 class Searched_Word(ndb.Model):
@@ -57,10 +65,19 @@ class MainHandler(webapp2.RequestHandler):
         word_searched = word_searched.replace("%20", " ") #puts spaces back into word to print
         defs = Word.query(Word.word == word_searched).fetch() #gets list of definitions for the word searched from database
 
+        markers = Marker.query().fetch()
+
         variables = {'word_searched': word_searched, 'defs': defs, 'search_def': urban_url,
-                     'todays_word': todays_word, 'todays_def': todays_def, 'trending': trending}
+                     'todays_word': todays_word, 'todays_def': todays_def, 'trending': trending, "markers": markers}
 
         self.response.write(template.render(variables))
+
+# class placeMarkerHandler(webapp2.RequestHandler):
+#     def get(self):
+#         template = env.get_template("home.html")
+#         markers = Marker.query().fetch()
+#         variables = {"markers": markers}
+#         self.response.write(template.render(variables))
 
 class AddWordHandler(webapp2.RequestHandler):
     def get(self):
@@ -69,21 +86,27 @@ class AddWordHandler(webapp2.RequestHandler):
     def post(self):
         location = self.request.get("location_box")
         safe_location = location.replace(" ", "+")
-        json_url = "https://maps.googleapis.com/maps/api/geocode/json?address=Oakland,+CA&key=AIzaSyAQeIATzPIzimJIYBgyN-b2rDX79rylZwc"
+        json_url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + safe_location + "&key=AIzaSyAQeIATzPIzimJIYBgyN-b2rDX79rylZwc"
         json_code = urlfetch.fetch(json_url)
         json_content = json_code.content
         result = json.loads(json_content)["results"]
         lat = result[0]["geometry"]["location"]["lat"]
         lng = result[0]["geometry"]["location"]["lng"]
-        geocoded_location = str(lat) + ", " + str(lng)
-        self.response.write(geocoded_location)
         word = self.request.get("word_box").lower()
         definition = self.request.get("definition_box")
-        added_word = Word(location=geocoded_location,
+        added_word = Word(latitude= lat,
+                          longitude= lng,
                           word=word,
                           definition=definition,
                           timestamp=datetime.datetime.now())
         added_word.put()
+    # Saving markers to the database
+        added_marker = Marker(latitude= lat,
+                              longitude= lng,
+                              word=word,
+                              definition=definition,
+                              timestamp=datetime.datetime.now())
+        added_marker.put()
         self.redirect("/")
 
 class AboutHandler(webapp2.RequestHandler):
@@ -93,6 +116,7 @@ class AboutHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ("/", MainHandler),
+    # ("/", placeMarkerHandler),
     ("/add", AddWordHandler),
     ("/about", AboutHandler)
 ], debug=True)
