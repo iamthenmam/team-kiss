@@ -89,4 +89,9 @@ h4 {
   font-weight: 300;
   padding: 0px;
   margin: 0px;
+  color: #333333;
+}
+
+a:visited {
+  color: #222222;
 }
