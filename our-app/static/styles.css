@@ -7,6 +7,20 @@
   z-index: 0; /* Set z-index to 0 so it'll be on the lowest layer */
 }
 
+#twitter{
+  position: absolute;
+  z-index: 2;
+  top: 242px;
+  left: 230px;
+}
+
+.google-button {
+  position: absolute;
+  z-index: 2;
+  top: 160px;
+  left: 400px;
+}
+
 #middle_menu {
   position: absolute;
   z-index: 1;

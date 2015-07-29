@@ -9,6 +9,13 @@
     <link rel="shortcut icon" href="/static/images/slap_icon.ico">
   </head>
   <body id="home-body" onload="initialize()">
+    <div id = "twitter">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="localhost:8080" data-text="SLAP : {{todays_word}}" data-size="large" data-hashtags="slangmap">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </div>
+    <div class="google-button">
+      <div class="g-plus" data-action="share" data-annotation="vertical-bubble" data-height="60"></div>
+    </div>
     <a href="/"><h1 id="logo">$LAP</h1></a>
     <h4>THE SLANG MAP</h4>
     <div id="middle_menu">
@@ -68,5 +75,6 @@
    </footer>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
    <script src="static/main.js"></script>
+   <script src="https://apis.google.com/js/platform.js" async defer></script>
   </body>
 </html>
