@@ -10,11 +10,11 @@
   </head>
   <body id="home-body" onload="initialize()">
     <a href="/"><h1 id="logo">$LAP</h1></a>
-    <h4>SLANG ON A MAP</h4>
+    <h4>THE SLANG MAP</h4>
     <div id="middle_menu">
       <div id="search-bar">
-        <form method="POST" action="">
-          <input id="search" type="search" name="search_name" size="40%" placeholder="Search for a word">
+        <form method="GET" action="/?search={{word_searched}}">
+          <input id="search" type="search" name="searched_word" size="40%" value='{{word_searched}}' placeholder="Search for a word">
           <!-- <button id="toggle-button">hide-show</button> -->
         </form>
         <form method="POST" action="">
