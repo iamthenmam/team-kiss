@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="text/javascript">
-function codeAddress() {
-  var address = document.getElementById("location_box").value;
-  geocoder.geocode( { "address": address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      map.setCenter(results[0].geometry.location);
-    } else {
-      alert("Geocode was not successful for the following reason: " + status);
-    }
-  });
-}
-    </script>
     <link href="static/styles.css" rel="stylesheet">
     <title>Add to the Map</title>
     <button> <a href = "/"> Home Page Logo </a> </button>
@@ -20,7 +8,7 @@ function codeAddress() {
   <body>
     <h1>Add to the Map</h1>
     <form method="post">
-      Location: <input name="location_box" type="text">
+      Location: <input id="uncoded_location" name="location_box" type="text">
       <button onclick="codeAddress()">convert</button>
       <br>
       Word/Phrase: <input name="word_box" type="text">
@@ -30,5 +18,6 @@ function codeAddress() {
       <br>
       <input name="add" type="submit" value="add">
     </form>
+    <script src="static/main.js"></script>
   </body>
 </html>
