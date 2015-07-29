@@ -8,7 +8,7 @@
   <body>
     <h1>Add to the Map</h1>
     <form method="post">
-      Location: <input name="location_box" type="text" required>
+      Location: <input id="uncoded_location" name="location_box" type="text" required>
       <button onclick="codeAddress()">convert</button>
       <br>
       Word/Phrase: <input name="word_box" type="text" required>
@@ -16,7 +16,7 @@
       Definition: <br>
       <textarea name="definition_box" rows="8" cols="40"></textarea required>
       <br>
-      <input name="add" type="submit" value="add">
+      <input name="add" type="submit" value="add" onclick="codeAddress">
     </form>
     <script src="static/main.js"></script>
   </body>

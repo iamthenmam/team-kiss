@@ -1,9 +1,6 @@
-// $("#hide-button").click(function() {
-//   $("#results").toggle()
-//
-// $("#search-button").click(function() {
-//   $("#results").show()
-
+$("#toggleButton").click(function() {
+  $("#results").toggle();
+});
 
 function loadScript() {
   var script = document.createElement("script");
@@ -16,8 +13,8 @@ function loadScript() {
 
 window.onload = loadScript;
 
-var geocoder
-var backgroundMap
+var geocoder;
+var backgroundMap;
 
 function initialize() {
   var mapCanvas = document.getElementById("map-canvas");
@@ -32,21 +29,18 @@ function initialize() {
 }
 
 function codeAddress() {
-  var converted_location
   var geocoder = new google.maps.Geocoder();
   var address = document.getElementById("uncoded_location").value;
-  geocoder.geocode( { "address": address}, function(results, status) {
+  geocoder.geocode({"address": address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-      var converted_location = results[0].geometry.location
-      map.setCenter(converted_location);
+      var converted_location = (results[0].geometry.location);
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
-  });
   function setOutput(itsId, itsValue) {
     document.getElementById(itsId).value = itsValue;
   };
   setOutput(uncoded_location, converted_location);
+  });
 }
-
 ////////////////////////////////////////////////////////////////////////////////

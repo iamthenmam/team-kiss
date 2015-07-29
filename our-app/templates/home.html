@@ -17,7 +17,6 @@
           <input id="location_search" type="search" name="location" size="40%" placeholder="Search for a location">
         </form>
       </div>
-
       <div id="slang_of_the_day">
         <h2> Slang of the Day: </h2>
         <h3>{{todays_word}}</h3>
@@ -32,24 +31,31 @@
         {% endfor %}
       <br>
       </div>
-
-      <div id="results">
-        <h2>Urban Dictionary says "{{word_searched}}" means:</h2>
-        {% if search_def|length == 0 %}
-          <p>No search results.</p>
-        {% else %}
-          {{search_def}}
-        {% endif %}
-        <br>
-        <p><h2>Others say "{{word_searched}}" means:</h2></p>
-        {% if defs|length == 0 %}
-          <p>No search results.</p>
-        {% else %}
-        {% for def in defs %}
-          <p>{{def.definition}}</p>
-        {% endfor %}
-        {% endif %}
-      </div>
+      {% if search_def|length == 0 and defs|length == 0  %}
+        <style media="screen">
+          #results {visibility: hidden;}
+          #toggleButton {visibility: hidden;}
+        </style>
+      {% else %}
+        <div id="results">
+          <h2>Urban Dictionary says "{{word_searched}}" means:</h2>
+          {% if search_def|length == 0 %}
+            <p>No search results.</p>
+          {% else %}
+            {{search_def}}
+          {% endif %}
+          <br>
+          <p><h2>Others say "{{word_searched}}" means:</h2></p>
+          {% if defs|length == 0 %}
+            <p>No search results.</p>
+          {% else %}
+          {% for def in defs %}
+            <p>{{def.definition}}</p>
+          {% endfor %}
+          {% endif %}
+        </div>
+      {% endif %}
+      <button id="toggleButton">toggle definitions</button>
     </div>
     <div id="map-canvas"></div>
     <footer id="links">
