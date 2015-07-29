@@ -7,27 +7,6 @@
   z-index: 0; /* Set z-index to 0 so it'll be on the lowest layer */
 }
 
-#twitter{
-  position: absolute;
-  z-index: 2;
-  top: 242px;
-  left: 230px;
-}
-
-.google-button {
-  position: absolute;
-  z-index: 2;
-  top: 165px;
-  left: 400px;
-}
-
-.fb-share-button{
-  position: absolute;
-  z-index: 2;
-  top: 240px;
-  left: 350px;
-}
-
 #middle_menu {
   position: absolute;
   z-index: 1;
@@ -167,6 +146,14 @@ a:visited {
   font-size: 25px;
   color: #CCCCCC;
   margin: 10px 0px 15px 10px;
+}
+
+#twitter, .google-button, .fb-share-button{
+  display: inline;
+}
+
+.fb-share-button{
+  bottom: 4px;
 }
 
 #add_word_form textarea {
