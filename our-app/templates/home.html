@@ -31,7 +31,7 @@
       <div id="trending">
         <h2>Trending Searches:</h2>
         {% for item in trending %}
-          {{item.word}} <br>
+          <a href="/?searched_word={{item.word}}">{{item.word}}</a><br>
         {% endfor %}
       <br>
       </div>

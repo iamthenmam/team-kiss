@@ -112,3 +112,12 @@ a:visited {
   padding: 5px 5px 5px 5px;
   radius: 100%;
 }
+
+#trending a {
+  color: #EEEEEE;
+  text-decoration: none;
+}
+
+#trending a:visited {
+  color: #EEEEEE;
+}
