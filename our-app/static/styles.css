@@ -74,9 +74,15 @@ h1, h2, h3 {
   right: 30px;
 }
 
-#links img {
-  padding: 5px;
+#add_button {
+  width: 140px;
+  height: 140px;
+}
+
+#about_button {
   width: 120px;
+  height: 120px;
+  padding: 10px;
 }
 
 h4 {
