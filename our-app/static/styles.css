@@ -17,8 +17,15 @@
 .google-button {
   position: absolute;
   z-index: 2;
-  top: 160px;
+  top: 165px;
   left: 400px;
+}
+
+.fb-share-button{
+  position: absolute;
+  z-index: 2;
+  top: 240px;
+  left: 350px;
 }
 
 #middle_menu {
