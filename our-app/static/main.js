@@ -2,12 +2,19 @@ $("#toggleButton").click(function() {
   $("#results").toggle();
 });
 
+function loadScript() {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "https://maps.googleapis.com/maps/api/js?" +
+               "key=AIzaSyABHO66skhWRgmCmYBKGQ-XSqZpaP8AkLI&" +
+               "v=3.exp&signed_in=false&callback=initialize";
+  document.body.appendChild(script);
+}
 
-// $("#hide-button").click(function() {
-//   $("#results").toggle()
-//
-// $("#search-button").click(function() {
-//   $("#results").show()
+window.onload = loadScript;
+
+var geocoder;
+var backgroundMap;
 
 function initialize() {
   var mapCanvas = document.getElementById("map-canvas");
@@ -19,16 +26,20 @@ function initialize() {
   };
 
   backgroundMap = new google.maps.Map(mapCanvas, mapOptions);
-
 }
 
-function loadScript() {
-  var script = document.createElement("script");
-  script.type = "text/javascript";
-  script.src = "https://maps.googleapis.com/maps/api/js?" +
-               "key=AIzaSyABHO66skhWRgmCmYBKGQ-XSqZpaP8AkLI&" +
-               "v=3.exp&signed_in=false&callback=initialize";
-  document.body.appendChild(script);
+function codeAddress() {
+  var geocoder = new google.maps.Geocoder();
+  var address = document.getElementById("uncoded_location").value;
+  geocoder.geocode({"address": address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      var converted_location = (results[0].geometry.location);
+    } else {
+      alert("Geocode was not successful for the following reason: " + status);
+    }
+  function setOutput(itsId, itsValue) {
+    document.getElementById(itsId).value = itsValue;
+  };
+  setOutput(uncoded_location, converted_location);
+  });
 }
-
-window.onload = loadScript;
