@@ -18,8 +18,8 @@ function initialize() {
 }
 
 function loadScript() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
+  var script = document.createElement("script");
+  script.type = "text/javascript";
   script.src = "https://maps.googleapis.com/maps/api/js?" +
                "key=AIzaSyABHO66skhWRgmCmYBKGQ-XSqZpaP8AkLI&" +
                "v=3.exp&signed_in=false&callback=initialize";
