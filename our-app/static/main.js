@@ -1,3 +1,8 @@
+$("#toggleButton").click(function() {
+  $("#results").toggle();
+});
+
+
 // $("#hide-button").click(function() {
 //   $("#results").toggle()
 //
