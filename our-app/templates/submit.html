@@ -23,18 +23,19 @@ function codeAddress() {
     <a href="/"><h1 id="logo">$LAP</h1></a>
   </head>
   <body>
-    <h1>Add to the Map</h1>
-    <form method="post">
-      Location: <input id="uncoded_location" name="location_box" type="text" required>
-      <button onclick="codeAddress()">convert</button>
-      <br>
-      Word/Phrase: <input name="word_box" type="text" required>
-      <br>
-      Definition: <br>
-      <textarea name="definition_box" rows="8" cols="40"></textarea required>
-      <br>
-      <input name="add" type="submit" value="add" onclick="codeAddress">
-    </form>
+    <div id="form">
+      <h1>Slap a word on the map</h1>
+      <form id="add_word_form" method="post">
+        Location: <br> <input id="uncoded_location" name="location_box" type="text" required>
+        <button onclick="codeAddress()">convert</button>
+        <br>
+        Word/Phrase: <br> <input id="add_word" name="word_box" type="text" required>
+        <br>
+        Definition: <br>
+        <textarea name="definition_box" rows="5" cols="40"></textarea required>
+        <input id="add" name="add" type="submit" value="add" onclick="codeAddress">
+      </form>
+    </div>
     <script src="static/main.js"></script>
   </body>
   <footer id="links">

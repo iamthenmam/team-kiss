@@ -121,3 +121,74 @@ a:visited {
 #trending a:visited {
   color: #EEEEEE;
 }
+
+#form {
+  position: absolute;
+  left: 250px;
+  top: 100px;
+}
+
+#add_word_form {
+  font-family: 'orbitron', 'sans-serif';
+  font-size: 20px;
+  width: 700px;
+}
+
+#add_word_form #uncoded_location, #add_word {
+  font-family: 'Dosis', "Arial", "sans-serif";
+  position: relative;
+  height: 40px;
+  width: 375px;
+  padding: 10px 16px;
+  background: #333333;
+  border: 0px;
+  font-size: 25px;
+  color: #CCCCCC;
+  margin: 20px 10px;
+}
+
+#add_word_form textarea {
+  font-family: 'Dosis', "Arial", "sans-serif";
+  position: relative;
+  padding: 10px 16px;
+  background: #333333;
+  border: 0px;
+  font-size: 25px;
+  margin: 10px;
+  color: #CCCCCC;
+  width: 375px;
+}
+
+#add {
+  font-family: 'Dosis', "Arial", "sans-serif";
+  position: relative;
+  height: 40px;
+  width: 410px;
+  padding: 10px 16px;
+  background: #333333;
+  border: 0px;
+  font-size: 20px;
+  color: #CCCCCC;
+  margin: 10px;
+}
+
+#info {
+  font-family: 'Dosis', "Arial", "sans-serif";
+  padding: 30px;
+  background: #333333;
+  border: 0px;
+  font-size: 25px;
+  margin: 0px 0px 0px 150px;
+  color: #CCCCCC;
+  width: 500px;
+}
+
+#info #home {
+  color: #888888;
+  padding: 0px;
+}
+
+#welcome {
+  margin: 100px 0px 0px 150px;
+  font-size: 46px;
+}
