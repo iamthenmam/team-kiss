@@ -8,13 +8,13 @@
   <body>
     <h1>Add to the Map</h1>
     <form method="post">
-      Location: <input id="uncoded_location" name="location_box" type="text">
+      Location: <input name="location_box" type="text" required>
       <button onclick="codeAddress()">convert</button>
       <br>
-      Word/Phrase: <input name="word_box" type="text">
+      Word/Phrase: <input name="word_box" type="text" required>
       <br>
       Definition: <br>
-      <textarea name="definition_box" rows="8" cols="40"></textarea>
+      <textarea name="definition_box" rows="8" cols="40"></textarea required>
       <br>
       <input name="add" type="submit" value="add">
     </form>
