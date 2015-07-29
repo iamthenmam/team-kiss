@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href='http://fonts.googleapis.com/css?family=Dosis:300,400,600|Abel|Economica:400,700|Open+Sans+Condensed:300|Yanone+Kaffeesatz:400,300' rel='stylesheet' type='text/css'>
     <link href="static/styles.css" rel="stylesheet">
     <title>The Slang Map</title>
   </head>
@@ -19,28 +20,28 @@
 
       <div id="slang_of_the_day">
         <h2> Slang of the Day: </h2>
-        <p>
-          {{todays_word}} <br>
-          {{todays_def}}
+        <h3>{{todays_word}}</h3>
+        {{todays_def}}
         </p>
       </div>
 
       <div id="trending">
         <h2>Trending Searches:</h2>
         {% for item in trending %}
-          <p>{{item.word}}</p>
+          {{item.word}} <br>
         {% endfor %}
+      <br>
       </div>
 
       <div id="results">
-        <h2>Urban Dictionary's definition for {{word_searched}}:</h2>
+        <h2>Urban Dictionary says "{{word_searched}}" means:</h2>
         {% if search_def|length == 0 %}
           <p>No search results.</p>
         {% else %}
           {{search_def}}
         {% endif %}
-        <br><br>
-        <p><h2>What others think {{word_searched}} means:</h2></p>
+        <br>
+        <p><h2>Others say "{{word_searched}}" means:</h2></p>
         {% if defs|length == 0 %}
           <p>No search results.</p>
         {% else %}

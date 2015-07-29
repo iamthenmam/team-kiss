@@ -38,12 +38,6 @@ class MainHandler(webapp2.RequestHandler):
         word_searched = self.request.get('search_name').lower() #gets searched word from html
         #logging.info(word_searched + "!!!!")
 
-        #trending
-        trending_results = Searched_Word.query().fetch()
-        #posts.sort(key=lambda x: x.timestamp, reverse=True)
-        trending_results.sort(key=lambda x: x.count, reverse=True)
-        trending = trending_results[:3]
-
         todays_word_source = urlfetch.fetch("http://urban-word-of-the-day.herokuapp.com/")
         todays_word_content = todays_word_source.content
         todays_word_dictionary = json.loads(todays_word_content)
@@ -61,6 +55,7 @@ class MainHandler(webapp2.RequestHandler):
             else:
                 Searched_Word(word=word_searched, count=1).put()
 
+
             if " " in word_searched:
                 word_searched = word_searched.replace(" ", "%20") #replaces spaces in word searched
             urban_data_source = urlfetch.fetch("http://api.urbandictionary.com/v0/define?term=%s" % word_searched)
@@ -69,6 +64,12 @@ class MainHandler(webapp2.RequestHandler):
             if len(urban_definition['list']) > 0: #checks if word actually has definitions
                 urban_url = urban_definition['list'][0]['definition'] #gets definition
                 #logging.info('!!!!!!' + urban_url)
+
+        #trending
+        trending_results = Searched_Word.query().fetch()
+        #posts.sort(key=lambda x: x.timestamp, reverse=True)
+        trending_results.sort(key=lambda x: x.count, reverse=True)
+        trending = trending_results[:3]
 
         word_searched = word_searched.replace("%20", " ") #puts spaces back into word to print
         defs = Word.query(Word.word == word_searched).fetch() #gets list of definitions for the word searched from database
@@ -89,12 +90,8 @@ class AddWordHandler(webapp2.RequestHandler):
                           word=word,
                           definition=definition,
                           timestamp=datetime.datetime.now())
-        if not added_word.location and added_word.word and added_word.definition == None:
-            added_word.put()
-            self.redirect("/")
-        else:
-            self.redirect("/add")
-
+        added_word.put()
+        self.redirect("/")
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
