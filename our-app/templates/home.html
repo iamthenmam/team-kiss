@@ -38,9 +38,9 @@
       <div id="trending">
         <h2>Trending Searches:</h2>
         {% for item in trending %}
-          <a href="/?searched_word={{item.word}}">{{item.word}}</a><br>
+          <a href="/?searched_word={{item.word}}">{{item.word}}</a>
         {% endfor %}
-      <br>
+      <br><br>
       </div>
       {% if search_def|length == 0 and defs|length == 0  %}
          <style media="screen">
@@ -67,10 +67,10 @@
          <div id = "twitter">
            <a href="https://twitter.com/share" class="twitter-share-button" data-url="localhost:8080" data-text="SLAP : {{word_searched}}" data-hashtags="slangmap">Tweet</a>
            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-         </div>
+         </div> &nbsp;&nbsp;&nbsp;
          <div class="google-button">
-           <div class="g-plus" data-action="share" data-annotation="bubble"></div>         </div>
-         <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+           <div class="g-plus" data-action="share" data-annotation="bubble"></div> &nbsp;&nbsp;&nbsp;         </div>
+         <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div> <br><br>
        </div>
        </div>
       {% endif %}

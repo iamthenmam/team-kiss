@@ -200,3 +200,8 @@ a:visited {
   margin: 100px 0px 0px 150px;
   font-size: 46px;
 }
+
+#trending a {
+  padding: 0px;
+  margin: 0px 25px;
+}
