@@ -93,7 +93,7 @@ class MainHandler(webapp2.RequestHandler):
 
         markers = Marker.query().fetch()
 
-        variables = {'word_searched': word_searched, 'defs': defs, 'search_def': urban_url,
+        variables = {'searched_word': word_searched, 'defs': defs, 'search_def': urban_url,
                      'todays_word': todays_word, 'todays_def': todays_def, 'trending': trending, "markers": markers,
                      'loc_lat': loc_lat, 'loc_lng': loc_lng, 'location_searched': location_searched, "loc_zoom": loc_zoom}
 

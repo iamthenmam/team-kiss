@@ -20,8 +20,8 @@
     <h4>THE SLANG MAP</h4>
     <div id="middle_menu">
       <div id="search-bar">
-        <form method="GET" action="/?search={{word_searched}}">
-          <input id="search" type="search" name="searched_word" size="40%" value='{{word_searched}}' placeholder="Search for a word">
+        <form method="GET" action="/?search={{searched_word}}">
+          <input id="search" type="search" name="searched_word" size="40%" value='{{searched_word}}' placeholder="Search for a word">
           <!-- <button id="toggle-button">hide-show</button> -->
         </form>
         <form method="GET" action="/?location_searched={{location_searched}}">
@@ -50,26 +50,26 @@
          </style>
        {% else %}
          <div id="results">
-           <h2>Urban Dictionary says "{{word_searched}}" means:</h2>
+           <h2>Urban Dictionary says "{{searched_word}}" means:</h2>
            {% if search_def|length == 0 %}
              <p>No search results.</p>
            {% else %}
              {{search_def}}
            {% endif %}
            <br>
-           <p><h2>Others say "{{word_searched}}" means:</h2></p>
+           <p><h2>Others say "{{searched_word}}" means:</h2></p>
            {% if defs|length == 0 %}
-             <p>No one has defined "{{word_searched}}".</p>
+             <p>No one has defined "{{searched_word}}".</p>
            {% else %}
              {% for def in defs %}
                <p>{{def.definition}}</p>
              {% endfor %}
            {% endif %}
-           <a href="/add">Slap on the map what you think "{{word_searched}}" means!</a>
+           <a href="/add">Slap on the map what you think "{{searched_word}}" means!</a>
            <br><br>
 
            <div id = "twitter">
-             <a href="https://twitter.com/share" class="twitter-share-button" data-url="localhost:8080" data-text="SLAP : {{word_searched}}" data-hashtags="slangmap">Tweet</a>
+             <a href="https://twitter.com/share" class="twitter-share-button" data-url="localhost:8080" data-text="SLAP : {{searched_word}}" data-hashtags="slangmap">Tweet</a>
              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
            </div> &nbsp;&nbsp;&nbsp;
            <div class="google-button">
@@ -82,31 +82,24 @@
     </div>
     <div id="map-canvas"></div>
     <script>
-window.markers = [];
-  function addMarker(itsLat, itsLng, itsWord) {
-    marker = {"lat": itsLat,
-              "lng": itsLng,
-              "title": itsWord};
-    window.markers.push(marker);
-  }
-window.word_searched = "{{word_searched}}";
-console.log(window.word_searched);
-window.location_searched = {"loc_lat": {{loc_lat}}, "loc_lng": {{loc_lng}}, "loc_zoom": {{loc_zoom}}};
+      window.searched_word = "{{searched_word}}";
+      console.log(window.searched_word);
+      window.location_searched = {"loc_lat": {{loc_lat}}, "loc_lng": {{loc_lng}}, "loc_zoom": {{loc_zoom}}};
     </script>
-      <script>
-window.markers = [];
-function addMarker(itsLat, itsLng, itsWord, itsDefinition) {
-  string = "<div id='content'>" +
-           "<h3>" + itsWord + "</h3>" +
-           "<p>" + itsDefinition + "</p>" +
-           "</div>";
+    <script>
+      window.markers = [];
+      function addMarker(itsLat, itsLng, itsWord, itsDefinition) {
+        string = "<div id='content'>" +
+                 "<h3>" + itsWord + "</h3>" +
+                 "<p>" + itsDefinition + "</p>" +
+                 "</div>";
 
-  marker = {"lat": itsLat,
-            "lng": itsLng,
-            "title": itsWord,
-            "string": string};
-  window.markers.push(marker);
-};
+        marker = {"lat": itsLat,
+                  "lng": itsLng,
+                  "title": itsWord,
+                  "string": string};
+        window.markers.push(marker);
+      };
     </script>
     {% for marker in markers %}
       <script>

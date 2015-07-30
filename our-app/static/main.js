@@ -28,25 +28,31 @@ function initialize() {
   function placeMarker(marker, searched) {
     var location = new google.maps.LatLng(marker.lat,marker.lng);
 
-    if (!searched) {
-        var pinColor = '';
-     function getRandomColor() {
-       var letters = '0123456789ABCDEF'.split('');
-       for (var i = 0; i < 6; i++ ) {
-           pinColor += letters[Math.floor(Math.random() * 16)];
-       }
-       return pinColor;
-     }
-     pinColor = getRandomColor();
-        var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/" + pinColor + "/");
+    var pinColor = "";
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF'.split('');
+      for (var i = 0; i < 6; i++) {
+          pinColor += letters[Math.floor(Math.random() * 16)];
+      }
+      return pinColor;
     };
 
-    var googleMarker = new google.maps.Marker({
-        icon: pinImage,
-        position: location,
-        map: backgroundMap,
-        title: marker.title
-    });
+    if (!searched) {
+      pinColor = getRandomColor();
+      var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/" + pinColor + "/");
+      var googleMarker = new google.maps.Marker({
+          icon: pinImage,
+          position: location,
+          map: backgroundMap,
+          title: marker.title
+      });
+    } else {
+      var googleMarker = new google.maps.Marker({
+          position: location,
+          map: backgroundMap,
+          title: marker.title
+      });
+    };
 
     function displayString(wordAndDef) {
       var infowindow = new google.maps.InfoWindow({
@@ -64,14 +70,9 @@ function initialize() {
   for (marker in window.markers) {
     var searched = false;
     window.markers[marker];
-    if (window.markers[marker].title == window.word_searched) {
+    if (window.markers[marker].title == window.searched_word) {
       searched = true;
     };
     placeMarker(window.markers[marker], searched);
-  };
-
-  for (marker_key in window.markers) {
-    var marker = window.markers[marker_key];
-    placeMarker(marker);
   };
 }
