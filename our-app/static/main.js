@@ -29,7 +29,16 @@ function initialize() {
     var location = new google.maps.LatLng(marker.lat,marker.lng);
 
     if (!searched) {
-        var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/093D70/");
+        var pinColor = '';
+     function getRandomColor() {
+       var letters = '0123456789ABCDEF'.split('');
+       for (var i = 0; i < 6; i++ ) {
+           pinColor += letters[Math.floor(Math.random() * 16)];
+       }
+       return pinColor;
+     }
+     pinColor = getRandomColor();
+        var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/" + pinColor + "/");
     };
 
     var googleMarker = new google.maps.Marker({
