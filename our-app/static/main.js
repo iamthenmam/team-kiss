@@ -25,16 +25,24 @@ function initialize() {
 
   var backgroundMap = new google.maps.Map(mapCanvas, mapOptions);
 
-  function placeMarker(marker) {
+  function placeMarker(marker, searched) {
     var location = new google.maps.LatLng(marker.lat,marker.lng);
+    if (!searched) {
+        var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/093D70/");
+    };
     var marker = new google.maps.Marker({
+        icon: pinImage,
         position: location,
         map: backgroundMap,
         title: marker.title
     });
   }
   for (marker in window.markers) {
+    var searched = false;
     window.markers[marker];
-    placeMarker(window.markers[marker]);
+    if (window.markers[marker].title == window.word_searched) {
+      searched = true;
+    };
+    placeMarker(window.markers[marker], searched);
   };
 }

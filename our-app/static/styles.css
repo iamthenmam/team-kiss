@@ -213,3 +213,20 @@ a:visited {
   padding: 0px;
   margin: 0px 25px;
 }
+
+#slang_of_the_day a {
+  text-decoration: none;
+  color: #EEEEEE;
+}
+
+#slang_of_the_day a:visited {
+  color: #EEEEEE;
+}
+
+#results a {
+  color: #EEEEEE;
+}
+
+#results a:visited {
+  color: #EEEEEE;
+}

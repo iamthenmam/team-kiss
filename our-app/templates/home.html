@@ -25,18 +25,18 @@
           <!-- <button id="toggle-button">hide-show</button> -->
         </form>
         <form method="GET" action="/?location_searched={{location_searched}}">
-          <input id="location_search" type="search" name="location" size="40%" value='{{location_searched}}' placeholder="Search for a location">
+          <input id="location_search" type="search" name="location_searched" size="40%" value='{{location_searched}}' placeholder="Search for a location">
         </form>
       </div>
 
       <div id="slang_of_the_day">
-        <h2> Slang of the Day: </h2>
-        <h3>{{todays_word}}</h3>
+        <h2> Word of the Day:</h2>
+        <h3><a href='/?searched_word={{todays_word}}'>{{todays_word}}</a></h3>
         {{todays_def}}
         </p>
       </div>
       <div id="trending">
-        <h2>Trending Searches:</h2>
+        <h2>Trending Searches: </h2>
         {% for item in trending %}
           <a href="/?searched_word={{item.word}}">{{item.word}}</a>
         {% endfor %}
@@ -59,12 +59,14 @@
            <br>
            <p><h2>Others say "{{word_searched}}" means:</h2></p>
            {% if defs|length == 0 %}
-             <p>No search results.</p>
+             <p>No one has defined "{{word_searched}}".</p>
            {% else %}
              {% for def in defs %}
                <p>{{def.definition}}</p>
              {% endfor %}
            {% endif %}
+           <a href="/add">Slap on the map what you think "{{word_searched}}" means!</a>
+           <br><br>
 
            <div id = "twitter">
              <a href="https://twitter.com/share" class="twitter-share-button" data-url="localhost:8080" data-text="SLAP : {{word_searched}}" data-hashtags="slangmap">Tweet</a>
@@ -87,11 +89,13 @@
                   "title": itsWord};
         window.markers.push(marker);
       }
+    window.word_searched = "{{word_searched}}";
+    console.log(window.word_searched);
     window.location_searched = {"loc_lat": {{loc_lat}}, "loc_lng": {{loc_lng}}, "loc_zoom": {{loc_zoom}}};
     </script>
     {% for marker in markers %}
       <script>
-        addMarker({{marker.latitude}}, {{marker.longitude}}, "{{marker.word}}")
+        addMarker({{marker.latitude}}, {{marker.longitude}}, "{{marker.word}}");
       </script>
     {% endfor %}
     <footer id="links">

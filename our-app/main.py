@@ -30,23 +30,31 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template("home.html")
 
-        location_searched = self.request.get('location')
+        location_searched = self.request.get('location_searched')
 
         safe_location = location_searched.replace(" ", "+")
         json_url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + safe_location + "&key=AIzaSyAQeIATzPIzimJIYBgyN-b2rDX79rylZwc"
         json_code = urlfetch.fetch(json_url)
         json_content = json_code.content
         result = json.loads(json_content)["results"]
+
         if location_searched is "" or len(result) is 0:
-            loc_lat = 39.8282
-            loc_lng = -98.5795
-            loc_zoom = 5
+            loc_lat = 40.8282
+            loc_lng = -105.203125
+            loc_zoom = 4
         else:
             loc_lat = result[0]["geometry"]["location"]["lat"]
             loc_lng = result[0]["geometry"]["location"]["lng"]
             loc_zoom = 11
 
         word_searched = self.request.get('searched_word')
+
+        if len(word_searched) > 0:
+            markers = Marker.query(Marker.word == word_searched).fetch()
+            if len(markers) > 0:
+                loc_lat = markers[0].latitude
+                loc_lng = markers[0].longitude
+                loc_zoom = 11
 
         todays_word_source = urlfetch.fetch("http://urban-word-of-the-day.herokuapp.com/")
         todays_word_content = todays_word_source.content
@@ -125,7 +133,8 @@ class AddWordHandler(webapp2.RequestHandler):
                               definition=definition,
                               timestamp=datetime.datetime.now())
         added_marker.put()
-        self.redirect("/")
+
+        self.redirect("/?location_searched=%s" % location)
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
