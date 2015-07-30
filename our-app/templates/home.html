@@ -82,20 +82,35 @@
     </div>
     <div id="map-canvas"></div>
     <script>
-    window.markers = [];
-      function addMarker(itsLat, itsLng, itsWord) {
-        marker = {"lat": itsLat,
-                  "lng": itsLng,
-                  "title": itsWord};
-        window.markers.push(marker);
-      }
-    window.word_searched = "{{word_searched}}";
-    console.log(window.word_searched);
-    window.location_searched = {"loc_lat": {{loc_lat}}, "loc_lng": {{loc_lng}}, "loc_zoom": {{loc_zoom}}};
+window.markers = [];
+  function addMarker(itsLat, itsLng, itsWord) {
+    marker = {"lat": itsLat,
+              "lng": itsLng,
+              "title": itsWord};
+    window.markers.push(marker);
+  }
+window.word_searched = "{{word_searched}}";
+console.log(window.word_searched);
+window.location_searched = {"loc_lat": {{loc_lat}}, "loc_lng": {{loc_lng}}, "loc_zoom": {{loc_zoom}}};
+    </script>
+      <script>
+window.markers = [];
+function addMarker(itsLat, itsLng, itsWord, itsDefinition) {
+  string = "<div id='content'>" +
+           "<h3>" + itsWord + "</h3>" +
+           "<p>" + itsDefinition + "</p>" +
+           "</div>";
+
+  marker = {"lat": itsLat,
+            "lng": itsLng,
+            "title": itsWord,
+            "string": string};
+  window.markers.push(marker);
+};
     </script>
     {% for marker in markers %}
       <script>
-        addMarker({{marker.latitude}}, {{marker.longitude}}, "{{marker.word}}");
+        addMarker({{marker.latitude}}, {{marker.longitude}}, "{{marker.word}}", "{{marker.definition}}")
       </script>
     {% endfor %}
     <footer id="links">

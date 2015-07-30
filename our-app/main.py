@@ -5,6 +5,7 @@ from google.appengine.api import urlfetch
 import datetime
 import json
 import logging
+import random
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader("templates"))
 
@@ -121,10 +122,17 @@ class AddWordHandler(webapp2.RequestHandler):
         word = self.request.get("word_box").lower()
         definition = self.request.get("definition_box")
         added_word = Word(latitude= lat,
-                          longitude= lng,
-                          word=word,
-                          definition=definition,
-                          timestamp=datetime.datetime.now())
+                              longitude= lng,
+                              word=word,
+                              definition=definition,
+                              timestamp=datetime.datetime.now())
+        random_nums =  [x / 100000.0 for x in range(-625,625,25)]
+        find_list = Marker.query(Marker.latitude == lat and Marker.longitude == lng).fetch()
+        while len(find_list) > 0:
+            lat += random.choice(random_nums)
+            lng += random.choice(random_nums)
+            find_list = Marker.query(Marker.latitude == lat and Marker.longitude == lng).fetch()
+
         added_word.put()
     # Saving markers to the database
         added_marker = Marker(latitude= lat,
