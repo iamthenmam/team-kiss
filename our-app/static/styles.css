@@ -51,9 +51,15 @@ form {
 
 h3 {
   font-weight: normal;
+  font-weight: 200;
+  font-family: 'Dosis', 'sans-serif';
+  font-size: 23px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  padding-top: 0px;
 }
 
-h1, h2, h3 {
+h1, h2 {
   font-family: 'orbitron', 'sans-serif';
   font-weight: 200;
 }
@@ -85,6 +91,7 @@ h1, h2, h3 {
   width: 120px;
   height: 120px;
   padding: 10px;
+  opacity: .6;
 }
 
 h4 {
@@ -111,6 +118,7 @@ a:visited {
   margin-left: 20px;
   padding: 5px 5px 5px 5px;
   radius: 100%;
+  z-index: 2;
 }
 
 #trending a {
@@ -197,7 +205,7 @@ a:visited {
 }
 
 #welcome {
-  margin: 100px 0px 0px 150px;
+  margin: 100px 0px 10px 150px;
   font-size: 46px;
 }
 

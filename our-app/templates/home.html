@@ -24,8 +24,8 @@
           <input id="search" type="search" name="searched_word" size="40%" value='{{word_searched}}' placeholder="Search for a word">
           <!-- <button id="toggle-button">hide-show</button> -->
         </form>
-        <form method="POST" action="">
-          <input id="location_search" type="search" name="location" size="40%" placeholder="Search for a location">
+        <form method="GET" action="/?location_searched={{location_searched}}">
+          <input id="location_search" type="search" name="location" size="40%" value='{{location_searched}}' placeholder="Search for a location">
         </form>
       </div>
 
@@ -42,37 +42,40 @@
         {% endfor %}
       <br><br>
       </div>
+
       {% if search_def|length == 0 and defs|length == 0  %}
          <style media="screen">
            #results {visibility: hidden;}
            #toggleButton {visibility: hidden;}
          </style>
        {% else %}
-       <div id="results">
-         <h2>Urban Dictionary says "{{word_searched}}" means:</h2>
-         {% if search_def|length == 0 %}
-           <p>No search results.</p>
-         {% else %}
-           {{search_def}}
-         {% endif %}
-         <br>
-         <p><h2>Others say "{{word_searched}}" means:</h2></p>
-         {% if defs|length == 0 %}
-           <p>No search results.</p>
-         {% else %}
-         {% for def in defs %}
-           <p>{{def.definition}}</p>
-         {% endfor %}
-         {% endif %}
-         <div id = "twitter">
-           <a href="https://twitter.com/share" class="twitter-share-button" data-url="localhost:8080" data-text="SLAP : {{word_searched}}" data-hashtags="slangmap">Tweet</a>
-           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-         </div> &nbsp;&nbsp;&nbsp;
-         <div class="google-button">
-           <div class="g-plus" data-action="share" data-annotation="bubble"></div> &nbsp;&nbsp;&nbsp;         </div>
-         <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div> <br><br>
-       </div>
-       </div>
+         <div id="results">
+           <h2>Urban Dictionary says "{{word_searched}}" means:</h2>
+           {% if search_def|length == 0 %}
+             <p>No search results.</p>
+           {% else %}
+             {{search_def}}
+           {% endif %}
+           <br>
+           <p><h2>Others say "{{word_searched}}" means:</h2></p>
+           {% if defs|length == 0 %}
+             <p>No search results.</p>
+           {% else %}
+             {% for def in defs %}
+               <p>{{def.definition}}</p>
+             {% endfor %}
+           {% endif %}
+
+           <div id = "twitter">
+             <a href="https://twitter.com/share" class="twitter-share-button" data-url="localhost:8080" data-text="SLAP : {{word_searched}}" data-hashtags="slangmap">Tweet</a>
+             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+           </div> &nbsp;&nbsp;&nbsp;
+           <div class="google-button">
+             <div class="g-plus" data-action="share" data-annotation="bubble"></div> &nbsp;&nbsp;&nbsp;
+           </div>
+            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div> <br><br>
+          </div>
+         </div>
       {% endif %}
       <button id="toggleButton">toggle definitions</button>
     </div>
@@ -85,6 +88,7 @@
                   "title": itsWord};
         window.markers.push(marker);
       }
+    window.location_searched = {"loc_lat": {{loc_lat}}, "loc_lng": {{loc_lng}}, "loc_zoom": {{loc_zoom}}};
     </script>
     {% for marker in markers %}
       <script>

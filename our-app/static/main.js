@@ -2,8 +2,6 @@ $("#toggleButton").click(function() {
   $("#results").slideToggle(250);
 });
 
-////////////////////////////////////////////////////////////////////////////////
-
 function loadScript() {
   var script = document.createElement("script");
   script.type = "text/javascript";
@@ -20,8 +18,8 @@ function initialize() {
   var mapCanvas = document.getElementById("map-canvas");
 
   var mapOptions = {
-    center: new google.maps.LatLng(39.8282, -98.5795),
-    zoom: 4,
+    center: new google.maps.LatLng(window.location_searched.loc_lat, window.location_searched.loc_lng),
+    zoom: window.location_searched.loc_zoom,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 

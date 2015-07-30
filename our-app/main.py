@@ -29,6 +29,23 @@ class Searched_Word(ndb.Model):
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template("home.html")
+
+        location_searched = self.request.get('location')
+
+        safe_location = location_searched.replace(" ", "+")
+        json_url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + safe_location + "&key=AIzaSyAQeIATzPIzimJIYBgyN-b2rDX79rylZwc"
+        json_code = urlfetch.fetch(json_url)
+        json_content = json_code.content
+        result = json.loads(json_content)["results"]
+        if location_searched is "" or len(result) is 0:
+            loc_lat = 39.8282
+            loc_lng = -98.5795
+            loc_zoom = 5
+        else:
+            loc_lat = result[0]["geometry"]["location"]["lat"]
+            loc_lng = result[0]["geometry"]["location"]["lng"]
+            loc_zoom = 11
+
         word_searched = self.request.get('searched_word')
 
         todays_word_source = urlfetch.fetch("http://urban-word-of-the-day.herokuapp.com/")
@@ -68,7 +85,8 @@ class MainHandler(webapp2.RequestHandler):
         markers = Marker.query().fetch()
 
         variables = {'word_searched': word_searched, 'defs': defs, 'search_def': urban_url,
-                     'todays_word': todays_word, 'todays_def': todays_def, 'trending': trending, "markers": markers}
+                     'todays_word': todays_word, 'todays_def': todays_def, 'trending': trending, "markers": markers,
+                     'loc_lat': loc_lat, 'loc_lng': loc_lng, 'location_searched': location_searched, "loc_zoom": loc_zoom}
 
         self.response.write(template.render(variables))
 
