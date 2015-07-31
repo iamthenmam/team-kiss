@@ -31,7 +31,7 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template("home.html")
 
-        location_searched = self.request.get('location_searched')
+        location_searched = self.request.get('location_searched').strip()
 
         safe_location = location_searched.replace(" ", "+")
         json_url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + safe_location + "&key=AIzaSyAQeIATzPIzimJIYBgyN-b2rDX79rylZwc"
