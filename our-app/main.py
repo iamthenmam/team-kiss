@@ -31,7 +31,7 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template("home.html")
 
-        location_searched = self.request.get('location_searched').strip()
+        location_searched = self.request.get('location_searched')
 
         safe_location = location_searched.replace(" ", "+")
         json_url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + safe_location + "&key=AIzaSyAQeIATzPIzimJIYBgyN-b2rDX79rylZwc"
@@ -48,7 +48,7 @@ class MainHandler(webapp2.RequestHandler):
             loc_lng = result[0]["geometry"]["location"]["lng"]
             loc_zoom = 11
 
-        word_searched = self.request.get('searched_word')
+        word_searched = self.request.get('searched_word').strip()
 
         if len(word_searched) > 0:
             markers = Marker.query(Marker.word == word_searched).fetch()
