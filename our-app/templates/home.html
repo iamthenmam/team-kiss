@@ -20,7 +20,7 @@
     <h4>THE SLANG MAP</h4>
     <div id="middle_menu">
       <div id="search-bar">
-        <form method="GET" action="/?search={{searched_word}}">
+        <form method="GET" action="/?searched={{searched_word}}">
           <input id="search" type="search" name="searched_word" size="40%" value='{{searched_word}}' placeholder="Search for a word">
           <!-- <button id="toggle-button">hide-show</button> -->
         </form>
@@ -83,7 +83,6 @@
     <div id="map-canvas"></div>
     <script>
       window.searched_word = "{{searched_word}}";
-      console.log(window.searched_word);
       window.location_searched = {"loc_lat": {{loc_lat}}, "loc_lng": {{loc_lng}}, "loc_zoom": {{loc_zoom}}};
     </script>
     <script>
