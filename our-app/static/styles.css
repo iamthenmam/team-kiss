@@ -91,7 +91,7 @@ h1, h2 {
   width: 120px;
   height: 120px;
   padding: 10px;
-  opacity: .6;
+  opacity: .5;
 }
 
 h4 {
@@ -197,6 +197,7 @@ a:visited {
   margin: 0px 0px 0px 150px;
   color: #CCCCCC;
   width: 500px;
+  z-index: 1;
 }
 
 #info #home {
@@ -234,6 +235,9 @@ a:visited {
 #mag_bg {
   z-index: -1;
   position: absolute;
-  opacity: .2;
-  top: -100px;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
 }
