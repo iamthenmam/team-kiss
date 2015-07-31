@@ -109,8 +109,7 @@ class MainHandler(webapp2.RequestHandler):
 class AddWordHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template("submit.html")
-        variables = {'added_word': self.request.get('added_word')}
-        self.response.write(template.render(variables))
+        self.response.write(template.render())
     def post(self):
         location = self.request.get("location_box")
         safe_location = location.replace(" ", "+")
