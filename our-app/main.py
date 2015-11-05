@@ -152,9 +152,11 @@ class AboutHandler(webapp2.RequestHandler):
 
 def handle_404(request, response, exception):
     logging.exception(exception)
-    response.write('sorry')
+    template = env.get_template("error.html")
+    response.write(template.render())
 
 def handle_500(request, response, exception):
+    logging.exception(exception)
     template = env.get_template("error.html")
     response.write(template.render())
 
