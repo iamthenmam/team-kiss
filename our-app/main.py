@@ -150,9 +150,19 @@ class AboutHandler(webapp2.RequestHandler):
         template = env.get_template("about.html")
         self.response.write(template.render())
 
+def handle_404(request, response, exception):
+    logging.exception(exception)
+    response.write('sorry')
+
+def handle_500(request, response, exception):
+    template = env.get_template("error.html")
+    response.write(template.render())
+
 app = webapp2.WSGIApplication([
     ("/", MainHandler),
     # ("/", placeMarkerHandler),
     ("/add", AddWordHandler),
     ("/about", AboutHandler)
-], debug=True)
+], debug=False)
+app.error_handlers[404] = handle_404
+app.error_handlers[500] = handle_500
